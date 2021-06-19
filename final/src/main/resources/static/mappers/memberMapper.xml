@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.inha.mapper.MemberMapper">
+
+<insert id="memberJoin">
+	insert 
+	into FINAL_MEMBER 
+	values(
+	#{userId}, 
+	#{userPass}, 
+	#{userName}, 
+	#{userNickName},
+	#{userEmail}, 
+	#{userHello} 
+	)
+</insert>
+
+<select id="memberLogin" resultType="kr.ac.inha.vo.MemberVO">
+	SELECT 
+	ID AS userId, 
+	PW AS userPass, 
+	NICKNAME AS userNickName, 
+	NAME AS userName, 
+	MAIL AS userEmail, 
+	HELLO AS userHello
+	FROM FINAL_MEMBER
+	WHERE ID = #{userId} AND PW = #{userPass}
+</select>
+
+<update id="memberUpdate" >
+	UPDATE FINAL_MEMBER 
+	SET 
+	ID = #{member.userId},
+	PW = #{member.userPass},
+	NICKNAME = #{member.userNickName},
+	NAME = #{member.userName},
+	MAIL = #{member.userEmail},
+	HELLO = #{member.userHello}
+	where ID= #{session_id}
+</update>
+</mapper>
